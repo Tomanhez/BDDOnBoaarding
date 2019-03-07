@@ -35,4 +35,17 @@ class Cart
     {
         return $this->total;
     }
+
+    public function hasProductWithName(string $productName) : bool
+    {
+        /** @var Product $product */
+        foreach ($this->products as $product) {
+            if ($product->getName() === $productName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

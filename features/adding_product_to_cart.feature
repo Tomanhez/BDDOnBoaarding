@@ -6,7 +6,6 @@ Feature: Adding product to cart
     Background:
         Given there is a product "Jelly Beans" that coast 100.00 USD
 
-
     Scenario: Adding a single product to the cart
         When I add product "Jelly Beans" to my cart
         Then my cart should have "Jelly Beans" product inside

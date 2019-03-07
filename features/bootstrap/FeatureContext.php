@@ -43,7 +43,6 @@ final class FeatureContext implements Context
      */
     public function myCartShouldHaveProductInside(string $productName) : void
     {
-        /** @var Product $product */
         $product = $this->getProductByName($productName);
         Assert::true($this->cart->hasProduct($product));
     }
@@ -56,14 +55,40 @@ final class FeatureContext implements Context
         Assert::eq($this->cart->getTotoal(), new Money($total,$currencyCode));
     }
 
-    private function getProductByName(string  $productName): ?Product{
+    /**
+     * @When I try to add product :productName to my cart
+     */
+    public function tryToAddProductToMyCart(string $productName) : void
+    {
+        try {
+            $this->getProductByName($productName);
+        } catch (Exception $e) {
+            return;
+        }
+
+        throw new \Exception('Product should not exist');
+    }
+
+    /**
+     * @Then my cart should not have :productName product inside
+     */
+    public function myCartShouldNotHaveProductInside(string $productName) : void
+    {
+        $product = $this->getProductByName($productName);
+        Assert::false($this->cart->hasProduct($product));
+    }
+
+    private function getProductByName(string  $productName): Product
+    {
         /** @var Product $product */
-        foreach ($this->product as $product){
-            if($product->getName() === $productName){
+        foreach ($this->product as $product) {
+            if ($product->getName() === $productName) {
                 return $product;
             }
         }
 
         throw new Exception('Product not available');
     }
+
+
 }

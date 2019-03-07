@@ -9,16 +9,19 @@ use PhpSpec\ObjectBehavior;
 
 class CartSpec extends ObjectBehavior
 {
-    function it_contains_some_products(Product $product):void {
-        //Given
+    function it_contains_some_products(Product $product) : void
+    {
         $product->getPrice()->willReturn(new Money(100.00,'USD'));
-        //When
+
         $this->addProduct($product);
-        //Then
+
         $this->hasProduct($product)->shouldReturn(true);
     }
 
-    function it_has_total(Product $product, Product $secondProduct):void{
+
+
+    function it_has_total(Product $product, Product $secondProduct) : void
+    {
         $product->getPrice()->willReturn(new Money(100.00,'USD'));
         $secondProduct->getPrice()->willReturn(new Money(300.00,'USD'));
 
@@ -27,6 +30,21 @@ class CartSpec extends ObjectBehavior
 
         $this->getTotoal()->shouldBeLike(new Money(400.00,'USD'));
     }
+
+    function it_cant_contains_product_with_name(Product $product) : void
+    {
+        $product->getPrice()->willReturn(new Money(100.00,'USD'));
+
+        $product->getName()->willReturn('Princessa');
+
+        $this->addProduct($product);
+
+        $this->hasProductWithName('Princessa')->shouldReturn(true);
+        $this->hasProductWithName('Mars')->shouldReturn(false);
+
+    }
+
+
 
 
 }
