@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-final class Product
+class Product
 {
 
     /** @var string */
@@ -11,10 +11,6 @@ final class Product
     /** @var Money */
     private $price;
 
-    /**
-     * @param string $name
-     * @param Money $price
-     */
     public function __construct(string $name, Money $price)
     {
         $this->name = $name;

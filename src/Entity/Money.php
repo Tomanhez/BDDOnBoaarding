@@ -10,10 +10,6 @@ final class Money
     /** @var string */
     private $currencyCode;
 
-    /**
-     * @param float $amount
-     * @param string $currencyCode
-     */
     public function __construct(float $amount, string $currencyCode)
     {
         $this->amount = $amount;
