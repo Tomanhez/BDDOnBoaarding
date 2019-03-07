@@ -1,0 +1,16 @@
+default:
+    suites:
+        domain:
+            paths:
+              - "features/"
+            contexts:
+              - DomainContext
+            filters:
+                tags: "@domain"
+        ui:
+            paths:
+              - "features/"
+            contexts:
+              - UiContext
+            filters:
+              tags: "@ui"

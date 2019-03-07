@@ -4,6 +4,8 @@ namespace App\Entity;
 
 class Product
 {
+    /** @var int */
+    private $id;
 
     /** @var string */
     private $name;
@@ -15,6 +17,11 @@ class Product
     {
         $this->name = $name;
         $this->price = $price;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getName(): string

@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\Collection;
 
 class Cart
 {
+    /** @var int */
+    private $id;
+
     /** @var Collection|Product */
     private $products;
 
@@ -31,7 +34,7 @@ class Cart
         return $this->products->contains($product);
     }
 
-    public function getTotoal(): Money
+    public function getTotal(): Money
     {
         return $this->total;
     }
@@ -47,5 +50,13 @@ class Cart
 
         return false;
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+
 
 }

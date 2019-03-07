@@ -1,0 +1,8 @@
+App\Entity\Money:
+    type: embeddable
+    fields:
+        amount:
+            type: integer
+        currencyCode:
+            type: string
+            column: currency_code

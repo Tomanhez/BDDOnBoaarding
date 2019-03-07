@@ -28,7 +28,7 @@ class CartSpec extends ObjectBehavior
         $this->addProduct($product);
         $this->addProduct($secondProduct);
 
-        $this->getTotoal()->shouldBeLike(new Money(400.00,'USD'));
+        $this->getTotal()->shouldBeLike(new Money(400.00,'USD'));
     }
 
     function it_cant_contains_product_with_name(Product $product) : void

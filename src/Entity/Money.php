@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-final class Money
+class Money
 {
     /** @var float */
     private $amount;

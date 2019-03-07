@@ -1,0 +1,21 @@
+App\Entity\Cart:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToMany:
+        products:
+            targetEntity: App\Entity\Product
+            joinTable:
+                name: carts_products
+                joinColumns:
+                    cart_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    product_id:
+                        referencedColumnName: id
+    embedded:
+        total:
+            class: App\Entity\Money

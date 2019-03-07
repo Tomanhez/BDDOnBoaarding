@@ -7,7 +7,7 @@ use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
 
-final class FeatureContext implements Context
+final class DomainContext implements Context
 {
     /** @var array|Product */
     private $product = [];
@@ -52,7 +52,7 @@ final class FeatureContext implements Context
      */
     public function itsTotalShouldBeUsd(float $total, string $currencyCode) : void
     {
-        Assert::eq($this->cart->getTotoal(), new Money($total,$currencyCode));
+        Assert::eq($this->cart->getTotal(), new Money($total,$currencyCode));
     }
 
     /**
