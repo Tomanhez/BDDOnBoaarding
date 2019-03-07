@@ -74,8 +74,7 @@ final class FeatureContext implements Context
      */
     public function myCartShouldNotHaveProductInside(string $productName) : void
     {
-        $product = $this->getProductByName($productName);
-        Assert::false($this->cart->hasProduct($product));
+        Assert::false($this->cart->hasProductWithName($productName));
     }
 
     private function getProductByName(string  $productName): Product
