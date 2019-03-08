@@ -6,6 +6,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
@@ -20,9 +21,12 @@ final class UiContext extends MinkContext implements Context
         $this->objectMenager = $objectManager;
     }
 
+    /**
+     * @BeforeScenario
+     */
     public function purgeDatabase()
     {
-        
+        (new ORMPurger($this->objectMenager))->purge();
     }
 
     /**
