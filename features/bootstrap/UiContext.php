@@ -1,18 +1,35 @@
 <?php
 
+use App\Entity\Money;
+use App\Entity\Product;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Element\NodeElement;
+use Behat\MinkExtension\Context\MinkContext;
+use Doctrine\Common\Persistence\ObjectManager;
+use Webmozart\Assert\Assert;
 
 
-final class UiContext implements Context
+final class UiContext extends MinkContext implements Context
 {
+    /** @var ObjectManager */
+    private $objectMenager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->objectMenager = $objectManager;
+    }
+
 
     /**
      * @Given there is a product :productName that coast :price :currencyCode
      */
     public function thereIsProduct(string $productName, float $price, string $currencyCode) : void
     {
-        throw new PendingException();
+        $product = new Product($productName,new Money($price,$currencyCode));
+
+        $this->objectMenager->persist($product);
+        $this->objectMenager->flush();
     }
 
     /**
@@ -20,7 +37,15 @@ final class UiContext implements Context
      */
     public function addProductToMyCart(string $productName) : void
     {
-        throw new PendingException();
+        /** @var Product $product */
+        $product = $this
+            ->objectMenager
+            ->getRepository(Product::class)
+            ->findOneBy(['name'=> $productName])
+        ;
+
+        $this->visitPath('/products/'.$product->getId());
+        $this->pressButton('Add to cart');
     }
 
     /**
@@ -28,15 +53,21 @@ final class UiContext implements Context
      */
     public function myCartShouldHaveProductInside(string $productName) : void
     {
-        throw new PendingException();
+        $this->visitPath('/cart');
+
+        Assert::notNull(
+            $this->findElement(sprintf('#products tr:contains("%s")',$productName))
+        );
     }
 
     /**
      * @Then its total should be :total :currencyCode
      */
-    public function itsTotalShouldBeUsd(float $total, string $currencyCode) : void
+    public function itsTotalShouldBe(float $total, string $currencyCode) : void
     {
-        throw new PendingException();
+        Assert::same(
+            $this->findElement('#cart-total')->getText(),$total . '' . $currencyCode
+        );
     }
 
     /**
@@ -53,6 +84,11 @@ final class UiContext implements Context
     public function myCartShouldNotHaveProductInside(string $productName) : void
     {
         throw new PendingException();
+    }
+
+    private function  findElement(string $selector) : ?NodeElement
+    {
+        return $page = $this->getSession()->getPage()->find('css',$selector);
     }
 
 

@@ -26,7 +26,7 @@ class Cart
     public function addProduct(Product $product): void
     {
         $this->products->add($product);
-        $this->total = new Money($this->total->getAmount() + $product->getPrice()->getAmount(),'USD');
+        $this->total = $this->countTotal($product);
     }
 
     public function hasProduct(Product $product): bool
@@ -56,7 +56,8 @@ class Cart
         return $this->id;
     }
 
-
-
-
+    private function countTotal(Product $product) : Money
+    {
+        return new Money($this->total->getAmount() + $product->getPrice()->getAmount(),'USD');
+    }
 }

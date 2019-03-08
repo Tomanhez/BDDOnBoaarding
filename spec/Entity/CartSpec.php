@@ -2,7 +2,6 @@
 
 namespace spec\App\Entity;
 
-use App\Entity\Cart;
 use App\Entity\Money;
 use App\Entity\Product;
 use PhpSpec\ObjectBehavior;

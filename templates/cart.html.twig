@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table id="products">
+        <tbody>
+        {% for product in cart.products %}
+            <tr>
+                <td>{{ product.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <h3 id="cart-total">{{ cart.total.amount }} {{ cart.total.currencyCode }}</h3>
+    </table>
+{% endblock %}

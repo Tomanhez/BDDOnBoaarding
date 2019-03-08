@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ product.name }}</h1>
+    <h2>{{ product.price.amount }} {{ product.price.currencyCode }}</h2>
+    <form action="">
+        <button type="submit">Add to cart</button>
+    </form>
+{% endblock %}
