@@ -3,7 +3,8 @@
 {% block body %}
     <h1>{{ product.name }}</h1>
     <h2>{{ product.price.amount }} {{ product.price.currencyCode }}</h2>
-    <form action="">
+    <form action="{{ path('app_add_product_to_cart') }}" method="POST">
+        <input type="hidden" name="id" value="{{ product.id }}"/>
         <button type="submit">Add to cart</button>
     </form>
 {% endblock %}

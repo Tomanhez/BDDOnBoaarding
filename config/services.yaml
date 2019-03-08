@@ -18,5 +18,27 @@ services:
             - "@twig"
             - "@app.repository.product"
 
+    app.repository.cart:
+        class: Doctrine\ORM\EntityRepository
+        factory: "doctrine.orm.entity_manager:getRepository"
+        arguments:
+            - "App\\Entity\\Cart"
+
+    App\Controller\ShowCartAction:
+        arguments:
+            - "@twig"
+            - "@app.repository.cart"
+
+    App\Controller\AddProductToCartAction:
+        arguments:
+            - "@app.repository.product"
+            - "@doctrine.orm.entity_manager"
+            - "@router"
+            - "@App\\Provider\\CartProvider"
+
+    App\Provider\CartProvider:
+        arguments:
+            - "@app.repository.cart"
+
 
 

@@ -7,6 +7,7 @@ Feature: Adding multipleproducts to cart
         Given there is a product "Jelly Beans" that coast 100.00 USD
         And there is a product "PHP Mug" that coast 50.00 USD
 
+    @ui
     Scenario:  Adding multiple product to cart
         When I add product "Jelly Beans" to my cart
         And I add product "PHP Mug" to my cart

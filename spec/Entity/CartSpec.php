@@ -15,6 +15,8 @@ class CartSpec extends ObjectBehavior
         $this->addProduct($product);
 
         $this->hasProduct($product)->shouldReturn(true);
+
+        $this->getProducts()->shouldIterateAs([$product->getWrappedObject()]);
     }
 
 

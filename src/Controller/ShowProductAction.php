@@ -30,6 +30,4 @@ final class ShowProductAction
 
         return new Response($this->twig->render('product.html.twig',['product' => $product]));
     }
-
-
 }

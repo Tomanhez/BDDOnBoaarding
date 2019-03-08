@@ -56,8 +56,15 @@ class Cart
         return $this->id;
     }
 
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
     private function countTotal(Product $product) : Money
     {
         return new Money($this->total->getAmount() + $product->getPrice()->getAmount(),'USD');
     }
+
+
 }

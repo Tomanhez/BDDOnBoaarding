@@ -20,6 +20,10 @@ final class UiContext extends MinkContext implements Context
         $this->objectMenager = $objectManager;
     }
 
+    public function purgeDatabase()
+    {
+        
+    }
 
     /**
      * @Given there is a product :productName that coast :price :currencyCode
@@ -66,7 +70,7 @@ final class UiContext extends MinkContext implements Context
     public function itsTotalShouldBe(float $total, string $currencyCode) : void
     {
         Assert::same(
-            $this->findElement('#cart-total')->getText(),$total . '' . $currencyCode
+            $this->findElement('#cart-total')->getText(),$total . ' ' . $currencyCode
         );
     }
 
